@@ -38,8 +38,8 @@ flash = OpenAIChatCompletionsModel(model="gemini-2.5-flash", openai_client=exter
 @function_tool()
 async def search(query: str) -> str:
     print(f"🔎 Searching: {query}")
+    await asyncio.sleep(8)  # Add delay to avoid Gemini rate limit (10 RPM)
     return await tavily_client.search(query, max_results=2)
-
 @function_tool()
 async def extract_context(urls: list) -> dict:
     return await tavily_client.extract_context(urls)
@@ -61,7 +61,7 @@ parallel_research_agent = Agent(
 summarizer_agent = Agent(
     name="SummarizerAgent",
     model=flashlite,
-    instructions="Summarize clearly using bullet points, tables, stats.",
+    instructions="Summarize clearly using bullet points, avoid tables, stats.",
 )
 
 # Tools
@@ -75,11 +75,12 @@ agent = Agent(
     tools=[planning_tool, parallel_tool],
     handoffs=[handoff(summarizer_agent)],
     instructions="Use planning → parallel → summarize → return clean output.",
-    model_settings=ModelSettings(
-        temperature=0.3,
-        max_retries=5,
-        timeout=90
-    ),
+#    model_settings=ModelSettings(
+#     temperature=0.3,
+#     max_retries=5,
+#     timeout=90
+# )
+
 )
 
 
