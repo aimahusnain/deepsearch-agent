@@ -2,7 +2,7 @@
 
 This project is a **multi-agent research system** that leverages planning, parallel research, and summarization to deliver **clear, factual, and easily scannable answers**.  
 It combines **Gemini models** with the **Tavily search API** for up-to-date research.
-
+Video: https://youtu.be/jBzJCl_Jnf4
 ---
 
 ## 🚀 Setup and Usage
@@ -89,4 +89,5 @@ You can ask questions such as:
 2. **Plan** → ParallelResearchAgent gathers facts in parallel  
 3. **Findings** → SummarizerAgent formats a structured summary  
 4. **Final Answer** → User receives a scannable, factual response
+
 
